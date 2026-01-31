@@ -14,7 +14,13 @@ export default function OnboardingPage() {
     sessionLength: 15,
     levelSelfCheck: "ok",
     healthGroup: "healthy",
+    fitnessCheck: {
+      squat: "B",
+      push: "B",
+      balance: "B",
+    },
   });
+
 
   function submit() {
     const decision = decideOnboarding(answers);
@@ -121,6 +127,93 @@ export default function OnboardingPage() {
             </button>
           </div>
         </section>
+<section style={cardStyle}>
+  <div style={titleStyle}>4) Khả năng hiện tại (nhẹ, không áp lực)</div>
+  <div style={{ opacity: 0.75, marginTop: 6, fontSize: 13 }}>
+    Không có đáp án “tốt/kém”. Chúng tôi chỉ dùng để chọn nhịp tập an toàn.
+  </div>
+
+  {/* 4.1 Squat */}
+  <div style={{ marginTop: 12, fontWeight: 700 }}>4.1) Squat chậm 5 lần liên tiếp</div>
+  <div style={{ opacity: 0.75, marginTop: 6, fontSize: 13 }}>
+    Xuống–lên chậm 3–4 giây, ưu tiên giữ form.
+  </div>
+  <div style={{ marginTop: 10, display: "grid", gap: 8 }}>
+    {[
+      ["A", "Làm được, khá thoải mái"],
+      ["B", "Làm được nhưng mỏi nhanh / hơi mất thăng bằng"],
+      ["C", "Khó giữ form / thấy căng gối–lưng"],
+      ["D", "Không squat được"],
+    ].map(([k, label]) => (
+      <button
+        key={k}
+        onClick={() =>
+          setAnswers((p) => ({
+            ...p,
+            fitnessCheck: { ...p.fitnessCheck, squat: k as any },
+          }))
+        }
+        style={rowStyle(answers.fitnessCheck.squat === (k as any))}
+      >
+        {k}. {label}
+      </button>
+    ))}
+  </div>
+
+  {/* 4.2 Push */}
+  <div style={{ marginTop: 14, fontWeight: 700 }}>4.2) Chống đẩy cao (tay lên bàn/ghế)</div>
+  <div style={{ opacity: 0.75, marginTop: 6, fontSize: 13 }}>
+    Làm liên tục với form tương đối ổn.
+  </div>
+  <div style={{ marginTop: 10, display: "grid", gap: 8 }}>
+    {[
+      ["A", "8 cái trở lên"],
+      ["B", "4–7 cái"],
+      ["C", "Dưới 4 cái / rất mỏi tay"],
+      ["D", "Không làm được"],
+    ].map(([k, label]) => (
+      <button
+        key={k}
+        onClick={() =>
+          setAnswers((p) => ({
+            ...p,
+            fitnessCheck: { ...p.fitnessCheck, push: k as any },
+          }))
+        }
+        style={rowStyle(answers.fitnessCheck.push === (k as any))}
+      >
+        {k}. {label}
+      </button>
+    ))}
+  </div>
+
+  {/* 4.3 Balance */}
+  <div style={{ marginTop: 14, fontWeight: 700 }}>4.3) Đứng 1 chân 10 giây (mỗi bên)</div>
+  <div style={{ opacity: 0.75, marginTop: 6, fontSize: 13 }}>
+    Chỉ cần gần đúng. Nếu phân vân, chọn phương án thận trọng hơn.
+  </div>
+  <div style={{ marginTop: 10, display: "grid", gap: 8 }}>
+    {[
+      ["A", "Ổn định, giữ được dễ dàng"],
+      ["B", "Hơi rung, phải tập trung"],
+      ["C", "Rất khó giữ thăng bằng"],
+      ["D", "Không giữ được"],
+    ].map(([k, label]) => (
+      <button
+        key={k}
+        onClick={() =>
+          setAnswers((p) => ({
+            ...p,
+            fitnessCheck: { ...p.fitnessCheck, balance: k as any },
+          }))
+        }
+        style={rowStyle(answers.fitnessCheck.balance === (k as any))}
+      >
+        {k}. {label}
+      </button>
+    ))}
+  </div>
+</section>
 
         <button onClick={submit} style={primaryBtn}>
           Xem đề xuất của chúng tôi

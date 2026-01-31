@@ -146,10 +146,26 @@ export default function CoachTimerOverlay({
 
   return (
     <div style={backdrop}>
-      <div style={sheet}>
+      <div
+  style={sheet}
+  onClick={() => {
+    if (phase !== "work") return;
+    if (plan.mode !== "reps") return;
+    onWorkTap();
+  }}
+>
+
         <div style={{ display: "flex", justifyContent: "space-between", gap: 10 }}>
           <div style={{ fontWeight: 800 }}>{plan.title}</div>
-          <button onClick={onClose} style={iconBtn} aria-label="Đóng">✕</button>
+<button
+  onClick={(e) => {
+    e.stopPropagation();
+    onClose();
+  }}
+  style={iconBtn}
+>
+  ✕
+</button>
         </div>
 
         <div style={{ marginTop: 10, opacity: 0.75, fontSize: 13 }}>
@@ -170,7 +186,10 @@ export default function CoachTimerOverlay({
           </button>
         )}
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginTop: 12 }}>
+        <div
+          onClick={(e) => e.stopPropagation()}
+          style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginTop: 12 }}
+        >
           <button onClick={() => setPaused((p) => !p)} style={btn}>
             {paused ? "Tiếp tục" : "Tạm dừng"}
           </button>
@@ -210,10 +229,11 @@ const sheet: React.CSSProperties = {
   maxWidth: 420,
   borderRadius: 18,
   border: "1px solid rgba(255,255,255,0.15)",
-  background: "rgba(30,30,30,0.98)",
+  background: "rgba(16,18,24,0.98)",
   color: "rgba(255,255,255,0.92)",
   padding: 14,
 };
+
 
 
 const bigNumber: React.CSSProperties = {
@@ -229,10 +249,9 @@ const btn: React.CSSProperties = {
   borderRadius: 14,
   padding: "12px 12px",
   cursor: "pointer",
-  color: "rgba(255,255,255,0.92)",
   background: "rgba(255,255,255,0.06)",
+  color: "rgba(255,255,255,0.92)",
 };
-
 
 const tapBtn: React.CSSProperties = {
   marginTop: 10,
@@ -242,9 +261,10 @@ const tapBtn: React.CSSProperties = {
   padding: "14px 12px",
   cursor: "pointer",
   fontWeight: 800,
-  color: "rgba(255,255,255,0.92)",
   background: "rgba(255,255,255,0.10)",
+  color: "rgba(255,255,255,0.92)",
 };
+
 
 
 const iconBtn: React.CSSProperties = {

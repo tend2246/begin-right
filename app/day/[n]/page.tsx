@@ -130,7 +130,12 @@ export default function DayPage() {
           <>
             <section style={{ marginTop: 12, display: "grid", gap: 12 }}>
               {resolved.exercises.map((ex, idx) => (
-                <article key={idx} style={card}>
+                <article
+                  key={idx}
+                  className="br-card"
+                  style={card}
+                >
+
                   <div style={{ fontWeight: 800 }}>{ex.title}</div>
                   <div style={{ opacity: 0.7, fontSize: 13, marginTop: 4 }}>
                     {ex.sets} hiệp · {ex.reps} · nghỉ {ex.rest}
